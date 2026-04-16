@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Playfair+Display:wght@700;800;900&display=swap');
+
+:root {
+  --brand-50:  #fdf8f1;
+  --brand-100: #f9f0e0;
+  --brand-200: #ecdfc9;
+  --brand-300: #ddd3c3;
+  --brand-400: #c0a87a;
+  --brand-500: #b5813a;
+  --brand-600: #8a5e28;
+  --brand-700: #7a4a10;
+  --brand-800: #2c1a08;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'DM Mono', monospace;
+  background: linear-gradient(160deg, #f9f2e7 0%, #f0e4cc 100%);
+  min-height: 100vh;
+}
+
+input:focus {
+  outline: none;
+}
+
+/* ── Print styles ──────────────────────────── */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+    padding: 0 !important;
+  }
+  .payslip-paper {
+    box-shadow: none !important;
+    border: none !important;
+  }
+}
