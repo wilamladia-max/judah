@@ -71,17 +71,18 @@ function cutoffKey(dateStr: string): string {
 export function groupAttendanceByCutoff(
   records: AttendanceRecord[]
 ): AttendanceCutoffSummary[] {
-  const groups = new Map<string, AttendanceRecord[]>();
+  // Use a plain object instead of Map to avoid --downlevelIteration requirement
+  const groups: Record<string, AttendanceRecord[]> = {};
 
   for (const record of records) {
     const key = cutoffKey(record.date);
-    if (!groups.has(key)) groups.set(key, []);
-    groups.get(key)!.push(record);
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(record);
   }
 
   const summaries: AttendanceCutoffSummary[] = [];
 
-  for (const [, groupRecords] of groups) {
+  for (const groupRecords of Object.values(groups)) {
     // All records in this group belong to the same employee (filtered upstream)
     const first = groupRecords[0];
     const cutoff = buildCutoff(first.date);
